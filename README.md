@@ -2,7 +2,9 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.7.
 
-A website that create, edit and delete news from a website. Login and DB with Firebase.
+A website that create, edit and delete news from a website. Login and DB managed on Firebase.
+
+The Framework Design is Material Design.
 
 ## Development server
 
