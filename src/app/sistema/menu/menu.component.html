@@ -1,0 +1,93 @@
+<section class="section">
+  <div class="centerPosition" fxLayout="column" fxLayoutAlign="">
+    <mat-tab-group class="tab" backgroundColor="primary" mat-align-tabs="center">
+      <mat-tab label="Notícias" fxLayout="column">
+        <div class="topMenuSystem" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
+          <label class="mat-display-2 centerText titlePage">Notícias</label>
+          <button class="createButton" mat-flat-button color="primary" [routerLink]="'/noticia'">Criar Notícia</button>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2%" style="padding: 3%;">
+          <label class="mat-display-1 centerText titlePage">Todas as Notícias</label>
+          <mat-form-field class="fitlerInput" color="primary">
+            <mat-label>Filtrar Notícia</mat-label>
+            <input class="fitlerInput" matInput (keyup)="applyFilter($event)" placeholder="Ex. Graciliano Ramos" #input>
+          </mat-form-field>
+          
+          <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort>
+          
+              <!-- ID Column -->
+              <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Autor </th>
+                <td mat-cell *matCellDef="let row"> {{row?.autor}} </td>
+              </ng-container>
+          
+              <!-- Progress Column -->
+              <ng-container matColumnDef="progress">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+                <td mat-cell *matCellDef="let row"> {{row?.data.seconds*1000 | date: 'dd/MM/yyyy'}} </td>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+                <td mat-cell *matCellDef="let row"> {{row?.titulo}} </td>
+              </ng-container>
+          
+              <!-- Color Column -->
+              <ng-container matColumnDef="color">
+                <th mat-header-cell *matHeaderCellDef>Ver/Editar</th>
+              <td mat-cell *matCellDef="let row">
+                <div fxLayout fxLayoutGap="5%">
+                  <button mat-mini-fab color="primary" aria-label="Ver notícia" (click)="verNoticia(row?.titulo)">
+                    <mat-icon>remove_red_eye</mat-icon>
+                  </button>
+                  <button mat-mini-fab color="primary" aria-label="Editar Notícia" (click)="editarNoticia(row?.titulo)">
+                    <mat-icon>edit</mat-icon>
+                  </button>
+                </div>
+              </td>
+              </ng-container>
+          
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <tr class="mat-row" *matNoDataRow>
+                <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+              </tr>
+            </table>
+          
+            <mat-paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label="Artigos">
+        <div class="topMenuSystem" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
+          <label class="mat-display-2 centerText titlePage">Artigos</label>
+          <button class="createButton" mat-flat-button color="primary">Criar Artigo</button>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2%" style="padding: 3%;">
+          <label class="mat-display-1 centerText titlePage">Todos os Artigos</label>
+          
+        </div>
+      </mat-tab>
+      <mat-tab label="Membros">
+        <div class="topMenuSystem" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
+          <label class="mat-display-2 centerText titlePage">Membros</label>
+          <button class="createButton" mat-flat-button color="primary">Criar Membros</button>
+        </div>
+        <div fxLayout="column" fxLayoutAlign="center" fxLayoutGap="2%" style="padding: 3%;">
+          <label class="mat-display-1 centerText titlePage">Todos os Membros</label>
+          
+        </div>
+      </mat-tab>
+      <mat-tab label="Sair" style="height: 100vh;">
+        <div class="exitMenuSystem" fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="2%">
+          <label class="mat-display-2 centerText titlePage">Sair do Sistema</label>
+          <button class="createButton" mat-flat-button color="primary" (click)="logOutSytem()">Sair</button>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</section>

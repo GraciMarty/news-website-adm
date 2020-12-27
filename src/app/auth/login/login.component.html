@@ -1,0 +1,27 @@
+<section class="authSection">
+  <div fxLayout="column" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="2%" fxLayoutAlign="center center">
+    <div class="titlePage" fxLayout fxLayoutAlign="center center">
+      <label class="mat-display-3">APLJ - Administrador Site</label>
+    </div>
+    <div class="cardLogin" fxLayoutAlign="center center">
+      <div class="loginForm" fxLayout="column">
+        <h2 class="centerText">Entrar</h2> 
+        <form [formGroup]="loginForm" fxLayout="column" fxLayoutGap="5px" (ngSubmit)="login(loginForm)">
+          <mat-form-field class="example-full-width">
+            <mat-label>E-mail</mat-label>
+            <input matInput formControlName="email">
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Senha</mat-label>
+            <input type="password" matInput formControlName="senha">
+            <mat-icon matSuffix>https</mat-icon>
+          </mat-form-field>
+          <div fxLayout fxLayoutAlign="center">
+            <button class="loginButton" type="submit" mat-stroked-button [disabled]="!loginForm.valid">Acessar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

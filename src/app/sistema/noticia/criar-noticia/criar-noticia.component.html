@@ -1,0 +1,72 @@
+<section class="criarNoticiaContainer">
+  <div class="centerPosition" fxLayout="column" fxLayoutGap="" fxLayoutAlign="center center">
+    <br>
+    <br>
+    <label class="mat-display-2 centerText">Criar Notícia</label>
+    <form [formGroup]="editorForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Título da Notícia</mat-label>
+        <input class="titulo" formControlName="titulo" matInput>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Autor da Notícia</mat-label>
+        <input class="titulo" formControlName="autor" matInput>
+      </mat-form-field>
+      <quill-editor formControlName="editor"></quill-editor>
+      <br>
+      <div class="marginLeft" fxLayout fxLayoutGap="3%" >
+        <p for="Imagem" class="mat-display-1">Carregar imagem da notícia</p>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <div class="container">
+          <input type="file" style="display: none" #fileInput accept="*.png.jpg" (change)="onChangeFileInput($event)" />
+          <button mat-raised-button color="primary" class="file-select-button" (click)="onClickFileInputButton()">
+            <mat-icon>attach_file</mat-icon>
+            Carregar imagem
+          </button>
+          <br><p class="file-name" *ngIf="!file; else fileName"></p>
+          <ng-template #fileName>
+            <p class="file-name">{{ file?.name }}</p>
+          </ng-template>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <br><br>
+      <div fxLayout="row" fxLayoutAlign="space-evenly center" style="width: 100%">
+        <button class="verNoticiaButton" mat-raised-button color="primary" [disabled]="!editorForm.valid" (click)="editorContent(editorForm)">Prévia da Notícia</button>
+        <button class="buttonPostNews" mat-raised-button color="primary" [disabled]="!editorForm.valid" (click)="postarNoticia(editorForm)" >Postar Notícia</button>
+      </div>  
+    </form>
+  </div>
+</section>
+<br><br>
+<mat-divider></mat-divider>
+<br>
+<section *ngIf="previaNoticia.titulo">
+  <div class="centerPosition" fxLayout fxLayoutGap="3%">
+    <div class="divCardVerNoticia" fxLayout="column" fxLayoutGap="8%">
+      <mat-card class="example-card">
+        <img mat-card-image [src]="imgUrl">
+        <label class="mat-display-1">{{previaNoticia.titulo}}</label><br>
+        <mat-card-content>
+          <label [innerHTML]="previaNoticia.corpo.substring(0,150)+'...'"></label>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="buttonLeiaMais" mat-raised-button color="warn">Leia mais</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <div fxLayout="column">
+      <div class="noticiaContainer">
+        <img class="imagemNoticia" [src]="imgUrl"><br>
+        <label class="mat-display-2">{{previaNoticia.titulo}}</label><br>
+        <label class="mat-display-5 italicText">{{previaNoticia.autor}} </label>
+        <label class="mat-display-5 italicText">---</label>
+        <label class="mat-display-5 italicText"> {{previaNoticia.data | date}}</label>
+      </div>
+      <div class="noticiaContainer">
+        <label class="mat-display-1.5" [innerHTML]="previaNoticia.corpo"></label>
+        <div class="noticiaContainer"></div>
+      </div>
+    </div>
+  </div>
+</section>

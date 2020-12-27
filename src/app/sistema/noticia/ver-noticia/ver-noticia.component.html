@@ -1,0 +1,34 @@
+<section>
+  <div class="centerPosition" fxLayout fxLayoutGap="3%">
+    <div class="divCardVerNoticia" fxLayout="column" fxLayoutGap="8%">
+      <mat-card class="example-card">
+        <img mat-card-image [src]="noticia[0]?.imagem">
+        <label class="mat-display-1">{{noticia[0]?.titulo}}</label><br>
+        <mat-card-content>
+          <p [innerHTML]="noticia[0]?.corpo.substring(0,150)+'...'">
+            {{noticia[0]?.corpo.substring(0,150)}}...
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="buttonLeiaMais" mat-raised-button color="warn">Leia mais</button>
+        </mat-card-actions>
+      </mat-card>
+      <div>
+        <button class="buttonLeiaMais" mat-raised-button color="primary" (click)="backButton()">Voltar</button>
+      </div>
+    </div>
+    <div fxLayout="column">
+      <div class="noticiaContainer">
+        <img class="imagemNoticia" [src]="noticia[0]?.imagem">
+        <label class="mat-display-2">{{noticia[0]?.titulo}}</label><br>
+        <label class="mat-display-5 italicText">{{noticia[0]?.autor}} </label>
+        <label class="mat-display-5 italicText">---</label>
+        <label class="mat-display-5 italicText"> Data {{noticia[0]?.data.seconds*1000 | date: 'dd/MM/yyyy'}}</label>
+      </div>
+      <div class="noticiaContainer">
+        <label class="mat-display-1.5" [innerHTML]="noticia[0]?.corpo"></label>
+        <div class="noticiaContainer"></div>
+      </div>
+    </div>
+  </div>
+</section>
